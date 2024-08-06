@@ -12,9 +12,9 @@ class TableGame:
 
 
         def display_board(self):
-        """
-        Display the board with all elements (ships, hits, misses).
-        """
+            """
+            Display the board with all elements (ships, hits, misses).
+            """
 
         #print column headers
         print(" A B C D E") 
@@ -39,11 +39,11 @@ class TableGame:
         for x in range(5):
             row = [str(x)]
             for y in 'ABCDE':
-                if self.grid[(x, y)] === 'S':
+                if self.grid[(x, y)] == 'S':
                     row.append("*")
                 else:
                 #show the value in the cell
-                row.append(self.grid[(x, y)])
+                    row.append(self.grid[(x, y)])
             #print the row
             print(" ".join(row))
         print()
@@ -71,5 +71,4 @@ def main():
     computer_board = TableGame()
 
     print("Battleship ultimate!")
-
 
