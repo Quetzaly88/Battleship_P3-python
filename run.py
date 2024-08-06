@@ -18,7 +18,6 @@ class TableGame:
             """
             Display the board with all elements (ships, hits, misses).
             """
-
         # print column headers
         print(" A B C D E")
         # start row with the row number
@@ -30,6 +29,15 @@ class TableGame:
             # print the row
             print(" ".join(row))
         print()
+
+    def place_ship(self, x, y):
+        """
+        Place a ship on the board and mark position with S,
+        representing the Ship on the board.
+        """
+        self.grid[(x, y)] = 'S'
+        # add the position and append it to list
+        self.ships.append((x, y))
 
     def hide_ships(self):
         """
@@ -51,14 +59,21 @@ class TableGame:
             print(" ".join(row))
         print()
 
-    def place_ship(self, x, y):
+    def make_move(self, x, y):
         """
-        Place a ship on the board and mark position with S,
-        representing the Ship on the board.
+        Make a move using the two coordinates. If a ship is hit then
+        use 'X'. If is a missmark with '-'.
         """
-        self.grid[(x, y)] = 'S'
-        # add the position and append it to list
-        self.ships.append((x, y))
+        if self.grid[(x, y)] == 'S'
+            print("HIT!")
+            self.grid[(x, y)] = 'X'
+            return True
+        else:
+            print("MISS!")
+            self.grid[(x, y)] = '-'
+            return False
+
+    
 
 
 def main():
