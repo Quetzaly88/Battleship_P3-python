@@ -84,8 +84,21 @@ class TableGame:
 
 
 def main():
-    # reate board for two users. A person and the computer.
+    """
+    Create board for two users. A person and the computer. Generate
+    random positions ensuring to not have duplicates. Use loops.
+    and a range from 1-5. 
+    """
     tom_board = TableGame()
     computer_board = TableGame()
+    
+    # randint() method to return a random integer between(parameter).
+    for_in range(5):
+        while True:
+            x, y = random.randint(0, 4), random.choice('ABCDE')
+            # no duplicate positions
+            if (x, y) not in tom_board:
+                tom_board.place_ship(x, y)
+                break
 
     print("Battleship ultimate!")
