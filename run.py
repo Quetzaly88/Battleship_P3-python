@@ -64,7 +64,7 @@ class TableGame:
         Make a move using the two coordinates. If a ship is hit then
         use 'X'. If is a missmark with '-'.
         """
-        if self.grid[(x, y)] == 'S'
+        if self.grid[(x, y)] == 'S':
             print("HIT!")
             self.grid[(x, y)] = 'X'
             return True
@@ -73,7 +73,14 @@ class TableGame:
             self.grid[(x, y)] = '-'
             return False
 
-    
+    def ask_user_position():
+        """
+        Ask user for position using input(). Integer for row and capital
+        letter for column. Return the position as a Tuple. 
+        """
+        row = int(input("Enter row number. From 0 to 4"))
+        col = input("Enter column letter. Use A-E").upper()
+        return row, col 
 
 
 def main():
