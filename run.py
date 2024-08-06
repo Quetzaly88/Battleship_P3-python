@@ -121,3 +121,22 @@ def main():
         # computer's board has hidden ships. 
         print("Computer's board:")
         computer_board.hide_ships()
+
+        # users guess
+        print("Take your chance and guess where is a battleship")
+
+        # new variables 
+        row_number, column_letter = ask_user_position()
+
+        # check if position is already taken 
+        if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
+            print("That place is taken")
+            # another guess
+            continue
+
+        if computer_board.make_move[(row_number, column_letter)]:
+            guesses += 1
+            
+
+
+        
