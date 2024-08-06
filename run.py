@@ -76,23 +76,22 @@ class TableGame:
     def ask_user_position():
         """
         Ask user for position using input(). Integer for row and capital
-        letter for column. Return the position as a Tuple. 
+        letter for column. Return the position as a Tuple.
         """
         row = int(input("Enter row number. From 0 to 4"))
         col = input("Enter column letter. Use A-E").upper()
-        return row, col 
+        return row, col
 
 
 def main():
     """
     Create board for two users. A person and the computer. Generate
     random positions ensuring to not have duplicates. Use loops.
-    and a range from 1-5. 
+    and a range from 1-5.
     """
     tom_board = TableGame()
     computer_board = TableGame()
-    
-    # On Tom's board, randint() method to return a random integer between(parameter).
+    # On Tom's board, method to return a random integer between(parameter).
     for _ in range(5):
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
@@ -101,7 +100,7 @@ def main():
                 tom_board.place_ship(x, y)
                 break
 
-    # On computer's board, randint() method to return a random integer between(parameter).
+    # Return a random integer between(parameter).
     for _ in range(5):
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
@@ -109,26 +108,26 @@ def main():
             if (x, y) not in computer_board:
                 computer_board.place_ship(x, y)
                 break
-    
+
     print("Battleship ultimate!")
-    #initiate counting guesses
+    # initiate counting guesses
     guesses = 0
 
-    # Loop until the player makes correct guesses. Allowed 5 turns. 
+    # Loop until the player makes correct guesses. Allowed 5 turns.
     while guesses < 5:
         print("You are Tom. This is your board:")
         tom_board.display_board()
-        # computer's board has hidden ships. 
+        # computer's board has hidden ships.
         print("Computer's board:")
         computer_board.hide_ships()
 
         # users guess
         print("Take your chance and guess where is a battleship")
 
-        # new variables 
+        # new variables
         row_number, column_letter = ask_user_position()
 
-        # check if position is already taken 
+        # check if position is already taken
         if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
             print("That place is taken")
             # another guess
@@ -136,13 +135,10 @@ def main():
 
         if computer_board.make_move[(row_number, column_letter)]:
             guesses += 1
-            
+
         if guesses == 5:
             print("You sunk all the ships!")
 
     print(Game Over!)
     tom_board.display_board()
     computer_board.display_board()
-
-
-        
