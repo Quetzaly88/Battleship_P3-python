@@ -10,6 +10,22 @@ class TableGame:
         # empty list
         self.ships = []
     
+    def display_board(self):
+        """
+        Display the board with all elements (ships, hits, misses)
+        """
+        #print column headers
+        print(" A B C D E") 
+        #start row with the row number
+        for x in range(5):
+            row = [str(x)]
+            for y in 'ABCDE':
+                #show the value in the cell
+                row.append(self.grid[(x, y)])
+            #print the row
+            print(" ".join(row))
+        print()
+
 
     def place_ship(self, x, y):
         """
@@ -20,7 +36,12 @@ class TableGame:
         #add the position and append it to list
         self.ships.append((x, y))
 
-        
+    
+
+
+
+
+
 def main():
     #create board for two users. A person and the computer. 
     tom_board = TableGame()
