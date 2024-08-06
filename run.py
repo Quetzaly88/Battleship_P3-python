@@ -18,17 +18,13 @@ class TableGame:
         """
         Display the board with all elements (ships, hits, misses).
         """
-    # print column headers
-    print(" A B C D E")
-    # start row with the row number
-    for x in range(5):
-        row = [str(x)]
-        for y in 'ABCDE':
-            # show the value in the cell
-            row.append(self.grid[(x, y)])
-        # print the row
-        print(" ".join(row))
-    print()
+        print(" A B C D E")
+        for x in range(5):
+            row = [str(x)]
+            for y in 'ABCDE':
+                row.append(self.grid[(x, y)])
+            print(" ".join(row))
+        print()
 
     def place_ship(self, x, y):
         """
@@ -36,7 +32,6 @@ class TableGame:
         representing the Ship on the board.
         """
         self.grid[(x, y)] = 'S'
-        # add the position and append it to list
         self.ships.append((x, y))
 
     def hide_ships(self):
@@ -44,18 +39,14 @@ class TableGame:
         Display the board with ships hidden.
         Function used from display_board function.
         """
-        # print column headers
         print(" A B C D E")
-        # start row with the row number
         for x in range(5):
             row = [str(x)]
             for y in 'ABCDE':
                 if self.grid[(x, y)] == 'S':
                     row.append("*")
                 else:
-                    # show the value in the cell
                     row.append(self.grid[(x, y)])
-            # print the row
             print(" ".join(row))
         print()
 
@@ -105,33 +96,28 @@ def main():
     for _ in range(5):
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
-            # no duplicate positions
             if (x, y) not in computer_board.ships:
                 computer_board.place_ship(x, y)
                 break
 
     print("Battleship ultimate!")
-    # initiate counting guesses
     guesses = 0
 
     # Loop until the player makes correct guesses. Allowed 5 turns.
     while guesses < 5:
-        print("You are Tom. This is your board:")
+        print("You are Tom. This is your board:\n")
         tom_board.display_board()
-        # computer's board has hidden ships.
+
         print("Computer's board:")
         computer_board.hide_ships()
 
-        # users guess
-        print("Take your chance and guess where is a battleship")
+        print("Take your chance and guess where is a battleship\n")
 
         # new variables
         row_number, column_letter = ask_user_position()
 
-        # check if position is already taken
         if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
             print("That place is taken")
-            # another guess
             continue
 
         if computer_board.make_move[(row_number, column_letter)]:
@@ -143,3 +129,6 @@ def main():
     print("Game Over")
     tom_board.display_board()
     computer_board.display_board()
+
+
+main()
