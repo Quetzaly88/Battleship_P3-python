@@ -16,4 +16,6 @@ def main():
     tom_board = TableGame()
     computer_board = TableGame()
 
-    
+    print("Battleship ultimate!")
+
+
