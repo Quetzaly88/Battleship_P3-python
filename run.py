@@ -9,11 +9,13 @@ class TableGame:
         self.grid = {(x, y): "*" for x in range(5) for y in 'ABCDE'}
         # empty list
         self.ships = []
-    
-    def display_board(self):
+
+
+        def display_board(self):
         """
-        Display the board with all elements (ships, hits, misses)
+        Display the board with all elements (ships, hits, misses).
         """
+
         #print column headers
         print(" A B C D E") 
         #start row with the row number
@@ -25,7 +27,28 @@ class TableGame:
             #print the row
             print(" ".join(row))
         print()
+    
 
+    def hide_ships(self):
+        """
+        Display the board with ships hidden. Function used from display_board function. 
+        """
+        #print column headers
+        print(" A B C D E") 
+        #start row with the row number
+        for x in range(5):
+            row = [str(x)]
+            for y in 'ABCDE':
+                if self.grid[(x, y)] === 'S':
+                    row.append("*")
+                else:
+                #show the value in the cell
+                row.append(self.grid[(x, y)])
+            #print the row
+            print(" ".join(row))
+        print()
+
+    
 
     def place_ship(self, x, y):
         """
