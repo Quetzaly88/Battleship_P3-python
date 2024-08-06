@@ -137,6 +137,12 @@ def main():
         if computer_board.make_move[(row_number, column_letter)]:
             guesses += 1
             
+        if guesses == 5:
+            print("You sunk all the ships!")
+
+    print(Game Over!)
+    tom_board.display_board()
+    computer_board.display_board()
 
 
         
