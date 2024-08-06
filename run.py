@@ -130,5 +130,5 @@ def main():
     tom_board.display_board()
     computer_board.display_board()
 
-
-main()
+if __name__ == "__main__":
+    main()
