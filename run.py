@@ -118,7 +118,7 @@ def main():
             print("That place is taken")
             continue
 
-        if computer_board.make_move[(row_number, column_letter)]:
+        if computer_board.make_move(row_number, column_letter):
             guesses += 1
 
         if guesses == 5:
@@ -131,4 +131,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
