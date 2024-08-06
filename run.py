@@ -97,7 +97,7 @@ def main():
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
             # no duplicate positions
-            if (x, y) not in tom_board:
+            if (x, y) not in tom_board.ships:
                 tom_board.place_ship(x, y)
                 break
 
@@ -106,7 +106,7 @@ def main():
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
             # no duplicate positions
-            if (x, y) not in computer_board:
+            if (x, y) not in computer_board.ships:
                 computer_board.place_ship(x, y)
                 break
 
