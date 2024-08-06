@@ -93,7 +93,7 @@ def main():
     computer_board = TableGame()
     
     # On Tom's board, randint() method to return a random integer between(parameter).
-    for_in range(5):
+    for _ in range(5):
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
             # no duplicate positions
@@ -102,13 +102,22 @@ def main():
                 break
 
     # On computer's board, randint() method to return a random integer between(parameter).
-    for_in range(5):
+    for _ in range(5):
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
             # no duplicate positions
-            if (x, y) not in computer_board
+            if (x, y) not in computer_board:
                 computer_board.place_ship(x, y)
                 break
     
-
     print("Battleship ultimate!")
+    #initiate counting guesses
+    guesses = 0
+
+    # Loop until the player makes correct guesses. Allowed 5 turns. 
+    while guesses < 5:
+        print("You are Tom. This is your board:")
+        tom_board.display_board()
+        # computer's board has hidden ships. 
+        print("Computer's board:")
+        computer_board.hide_ships()
