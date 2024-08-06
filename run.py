@@ -14,21 +14,21 @@ class TableGame:
         # empty list
         self.ships = []
 
-        def display_board(self):
-            """
-            Display the board with all elements (ships, hits, misses).
-            """
-        # print column headers
-        print(" A B C D E")
-        # start row with the row number
-        for x in range(5):
-            row = [str(x)]
-            for y in 'ABCDE':
-                # show the value in the cell
-                row.append(self.grid[(x, y)])
-            # print the row
-            print(" ".join(row))
-        print()
+    def display_board(self):
+        """
+        Display the board with all elements (ships, hits, misses).
+        """
+    # print column headers
+    print(" A B C D E")
+    # start row with the row number
+    for x in range(5):
+        row = [str(x)]
+        for y in 'ABCDE':
+            # show the value in the cell
+            row.append(self.grid[(x, y)])
+        # print the row
+        print(" ".join(row))
+    print()
 
     def place_ship(self, x, y):
         """
@@ -91,6 +91,7 @@ def main():
     """
     tom_board = TableGame()
     computer_board = TableGame()
+
     # On Tom's board, method to return a random integer between(parameter).
     for _ in range(5):
         while True:
@@ -139,6 +140,6 @@ def main():
         if guesses == 5:
             print("You sunk all the ships!")
 
-    print(Game Over!)
+    print("Game Over")
     tom_board.display_board()
     computer_board.display_board()
