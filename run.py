@@ -11,7 +11,6 @@ class TableGame:
         X are numbers from 0-4 and y are letters A-E. Use * as empty spot.
         """
         self.grid = {(x, y): "*" for x in range(5) for y in 'ABCDE'}
-        # empty list
         self.ships = []
 
     def display_board(self):
@@ -64,14 +63,15 @@ class TableGame:
             self.grid[(x, y)] = '-'
             return False
 
-    def ask_user_position():
-        """
-        Ask user for position using input(). Integer for row and capital
-        letter for column. Return the position as a Tuple.
-        """
-        row = int(input("Enter row number. From 0 to 4"))
-        col = input("Enter column letter. Use A-E").upper()
-        return row, col
+
+def ask_user_position():
+    """
+    Ask user for position using input(). Integer for row and capital
+    letter for column. Return the position as a Tuple.
+    """
+    row = int(input("Enter row number. (0 to 4): "))
+    col = input("Enter column letter (A-E): ").upper()
+    return row, col
 
 
 def main():
@@ -87,7 +87,6 @@ def main():
     for _ in range(5):
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
-            # no duplicate positions
             if (x, y) not in tom_board.ships:
                 tom_board.place_ship(x, y)
                 break
@@ -113,7 +112,6 @@ def main():
 
         print("Take your chance and guess where is a battleship\n")
 
-        # new variables
         row_number, column_letter = ask_user_position()
 
         if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
@@ -130,5 +128,7 @@ def main():
     tom_board.display_board()
     computer_board.display_board()
 
+
 if __name__ == "__main__":
     main()
+    
