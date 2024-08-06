@@ -67,11 +67,19 @@ class TableGame:
 def ask_user_position():
     """
     Ask user for position using input(). Integer for row and capital
-    letter for column. Return the position as a Tuple.
+    letter for column. Return the position as a Tuple. Return an 
+    error message if the input is not between the ones required. 
     """
-    row = int(input("Enter row number. (0 to 4): "))
-    col = input("Enter column letter (A-E): ").upper()
-    return row, col
+    while True:
+        # urge the user for a valid input
+        try:
+            row = int(input("Enter row number. (0 to 4): "))
+            col = input("Enter column letter (A-E): ").upper()
+            if row not in range(5) or col not in 'ABCDE':
+                raise ValueError
+            return row, col
+        except ValueError:
+            print("Try again, just the numbers between 0-4 and letters 'ABCDE' are accepted!")
 
 
 def main():
