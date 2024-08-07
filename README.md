@@ -3,7 +3,7 @@
 Project 3
 Code Institute
 
-    This is a simple quiz game that tests your knowledge with true/false questions. This game includes: a log-in form, a set of questions, a track of your score and a form for feedback. 
+    This project has the workspace template from Code Institute. It's a simple battleship game using exclusively Python code. This game includes: two board, one for the computer and one for a user. Ten oportunities to guess wand hit where the computer's ships are and a track of hits and misses. At the end a message "Game Over" will be printed and the hits, misses and Ships that were in the board will be shown. 
 
 ![mockup](./assets/readme.files/mockup.webp)
 
