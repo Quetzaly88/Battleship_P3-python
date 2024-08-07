@@ -57,6 +57,7 @@ class TableGame:
         if self.grid[(x, y)] == 'S':
             print("HIT!")
             self.grid[(x, y)] = 'X'
+            self.ships.remove((x, y))
             return True
         else:
             print("MISS!")
@@ -132,8 +133,6 @@ def main():
                 break
         else:
             turns -= 1
-
-        turns -= 1
 
         if turns == 0:
             print("You have no chances left!")
