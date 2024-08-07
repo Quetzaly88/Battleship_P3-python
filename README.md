@@ -13,7 +13,7 @@ DESIGN
 There is no special design for this project because it's been exxlusiveky focused on Python the language and its functionality. The background color is only taken from the Code Institute template for this project. 
 
 
-WIREFRAMES
+WIREFRAMES / FLOWCHART
 
     In this project I've usedcreated the flowchart using draw.io. The flowchart shows in resume the steps taken to acconplish the battle game and be functional. 
 
@@ -41,32 +41,18 @@ FEATURES
     In the case that the player introduces other numbers that are not between 0-4 or letters that are not 'ABCDE'
     the error message will say "Try again, insert numbers between 0-4 and letters between 'ABCDE'!"
 
-![errormessage] (./assets/images/)
-    
+![error message](./assets/images/error%20message-insert-again.webp)
+
+    The user has 10 turns until the ships are founded. If all the turns are finished the "Game Over" message will show. 
 
 
+FUTURE IMPLEMENTATIONS: 
 
+    ACCESIBILITY
 
-* The landing page image
+    The page is easy to read and understand. The user will be able to restart the game using the button "run program".
 
-    The landing page includes the log-in box and the Quiz container.
-    Inside the quiz container we have different buttons:
-
-    - Start Button: When pushed, the title of "Quiz game" dissappears and instead the array of questions start to show.
-    - True and False buttons: The user chooses true or false and depending of the choice the "Correct Answer" increases. When all the array of questions has shown we have a message saying "You completed the quiz". 
-    - Reset Button: Any time during the game the user can push "Reset". The user can push restart and do the game over and over again. 
-    - Leave feedback button: At the end of the quiz we have share your feedback! and "Click here". When click here is pushed, a new page is loaded. 
-
-![quiz container](./assets/readme.files/main.page.webp)
-
-
-
-FUTURE IMPLEMENTATIONS
-
-ACCESIBILITY
-
-    The page is easy to read and understand. The user will be able to return to the main page from the feedback site. 
-    The colors are relaxing to the eye wich makes the user stay longer in the site. The font-families are friendly to dislexic users. In the project, I have include the sans-serif font family and "alt" to all images, which make easier for users with dissabilities to read. 
+    No other colors or fonts were used. 
 
 
 
@@ -74,14 +60,15 @@ TECHNOLOGIES USED
 
 * Languages Used:
 
-    As I'm learning more of coding, the langUages of this project are exclusively HTML & CSS and Javascript. 
+    I'm learning Python and this project is exclusively in that language.
+    Gitpod it's been used for writing code and heroku for deployment. 
    
 * Testing
 
-    - Log-in box, and all the buttons are responsive. 
+    - The two boards for user and computer are seen in the screen.  
     - The site is avaiable and readable in on all devices. 
-    - HTML. No errors were returned when passing through the official W3C validator
-    - CSS. No errors were found when passing through the official (Jigsaw) validator
+    - No errors of indentation were found in "CI Python Linter"
+    - No errors were found in "One Compiler" python. 
     
 
 
