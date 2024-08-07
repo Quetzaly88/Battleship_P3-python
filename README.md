@@ -5,31 +5,45 @@ Code Institute
 
     This project has the workspace template from Code Institute. It's a simple battleship game using exclusively Python code. This game includes: two board, one for the computer and one for a user. Ten oportunities to guess wand hit where the computer's ships are and a track of hits and misses. At the end a message "Game Over" will be printed and the hits, misses and Ships that were in the board will be shown. 
 
-![mockup](./assets/readme.files/mockup.webp)
-
+![mockup](./assets/images/mockup.webp)
 
 
 DESIGN
 
+There is no special design for this project because it's been exxlusiveky focused on Python the language and its functionality. The background color is only taken from the Code Institute template for this project. 
 
 
 WIREFRAMES
 
-    Most wireframes were made old school with pen and paper. I have used FIGMA just for a quick representation in README. 
+    In this project I've usedcreated the flowchart using draw.io. The flowchart shows in resume the steps taken to acconplish the battle game and be functional. 
 
-![main page](./assets/readme.files/wireframe1.webp)
-![form](./assets/readme.files/wireframe2.webp)
+![flowchart](./assets/images/flowchart.webp)
 
 
 
 FEATURES
 
-* The log in box:
+* The two game boards:
 
-    Here is a simple log-in box that requires an e-mai adress. It prevents the default form submission behavior, shows an alert indicating that the user has logged in, hides the login form, and then displays the main content container. This provides a basic user interface response to a successful login. After the user has logged in the box dissapears giving more focus to the quiz container. 
-    The log in feature is optional. 
+    In the beginning we have the two game boards. One for the user and the another for the computer.  
+    The columns are marked with letters and the rows with numbers 0-4. Here I used just five rows and five columns to make the game easier. 
 
-![log-in](./assets/readme.files/login.webp)
+    The user board has "S" that means where the ships are. 
+
+![user board](./assets/images/tom_board.webp)
+
+    The computer board has the ships hidden and the user has to guess where the ships are. 
+
+![computer board](./assets/images/computer_board.webp)
+
+    While the game is running, there will be a message saying "Take your chance and guess where is a battleship. 
+    The user has to introduce the write information otherwise an error message is shown. 
+    In the case that the player introduces other numbers that are not between 0-4 or letters that are not 'ABCDE'
+    the error message will say "Try again, insert numbers between 0-4 and letters between 'ABCDE'!"
+
+![errormessage] (./assets/images/)
+    
+
 
 
 
