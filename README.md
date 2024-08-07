@@ -58,11 +58,13 @@ FUTURE IMPLEMENTATIONS:
 
 TECHNOLOGIES USED
 
+
 * Languages Used:
 
     I'm learning Python and this project is exclusively in that language.
     Gitpod it's been used for writing code and heroku for deployment. 
    
+
 * Testing
 
     - The two boards for user and computer are seen in the screen.  
@@ -74,10 +76,14 @@ TECHNOLOGIES USED
 
 
 ![CI lintern TEST](./assets/images/CI%20lintern.webp)
+
+
 ![One compiler tester](./assets/images/tester.webp)
 
 
     - The lighthouse open source from Chrome ensures that this website is not only fast and efficient but also accessible, SEO-friendly, and adhering to best practices.
+    - The error shown in "One Compiler", "Error: Command failed: timeout 7 python3 main.py" indicates that the script main.py was terminated because it did not complete within the specified timeout of 7 seconds. This error typically occurs when the script takes too long to execute. For this issue I have not any other option that just let it be. I need more advanced code to extend a time period for the input. 
+
 
 ![LIGHTHOUSE TEST](./assets/images/lighthouseebattleship.webp)
 
@@ -94,19 +100,24 @@ TECHNOLOGIES USED
 
 * Owner stories 
     - I'm proud of my work but I understand that the game could have more improvements. The messages  were hard to find, I found myself looking for a message so what I did is to add extra spacing in all the text.  
-GOALS AND PURPOSE WITH THE PROJECT
-DETAIL ABOUT TARGET AUDIENCE
+    - The target audience will be every person older than 10 years old. I tested it with my child and she was able to play the game. 
 
 * Deployment
 
-    The site was deployed to GitHub pages. The steps to deploy are as follows:
+    The site was deployed in Heroku. 
 
-    - In the GitHub repository, navigate to the Settings tab.
-    - From the "Code and automation" source select "pages"
-    - On Github Pages find "Source", choose "deploy from a branch".
-    - On branch you will find two dop-down menus. Choose "main", "root" and push the "save button".
-    - Once the master branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
-    - The live link can be found here - https://github.com/Quetzaly88/Quiz-P2.git
+    - In Heroku, after opening an account and fixing the credits "Create a new 
+      app"
+    - When we have the code ready for deployment we can create a new app. 
+    - Create a unique name for the app because Heroke doesn't accept 
+      repetitions. 
+    - After creating the app we need to fix the app settings before deployment.
+    - This project doesn't need Config Vars because there are not secret    files.  
+    - Then we need to choose Buildpacks. Here I choose Python and Node.js. 
+    - After this settings are done we go to Deployment. Here, I used github and the name of my project P3 called Battleship -p3. Push connect. 
+    - I set up automatic deployments and I push the "Deploy branch" that is manual because I wanted to see the logs and the packages installed. 
+    - The app was succesfully deployed and now I can see the app on the web. 
+    - To restart the game we need to push "Run program" and It will reset the game. 
 
 
 
