@@ -85,18 +85,15 @@ TECHNOLOGIES USED
 
 * Bugs
 
-    The biggest mistake I did was to not use indentation. Then I realized that my project was not running but the tutors helped me. 
+    The biggest mistake I did was to not use the correct indentation. Then I realized that my project was not running but the tutors helped me. 
     I still wish to have less functions to avoid repetition but I just need to learn more python to use Refactoring. After this project I will learn more about it. 
-    
-    My experience was that I should't create too many variables and better to create them when I need them. 
-    I made some improvements and the quiz ended up functioning better.
 
     Some other problems that I found are:
-    - Media query was difficult to adapt after I was done with most of the project. 
-    - I had to go back to CSS theory because of details that I couldn't remember. 
-    - JavaScript is a fun language but I need more projects to practice so I can apply more or the theory. 
+    - In the begining the user could use 25 turns because I didn't have a limit of guesses. That 
+      produced a game that became exhausting. The problem if fixed with a limit of gueses of 10. 
 
 * Owner stories 
+    - I'm proud of my work but I understand that the game could have more improvements. The messages  were hard to find, I found myself looking for a message so what I did is to add extra spacing in all the text.  
 GOALS AND PURPOSE WITH THE PROJECT
 DETAIL ABOUT TARGET AUDIENCE
 

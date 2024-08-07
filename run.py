@@ -80,7 +80,7 @@ def ask_user_position():
                 raise ValueError
             return row, col
         except ValueError:
-            print("Try again, insert numbers between 0-4 and letters 'ABCDE'!")
+            print("Try again, insert numbers between 0-4 and letters 'ABCDE'!\n")
 
 
 def main():
@@ -108,7 +108,7 @@ def main():
                 computer_board.place_ship(x, y)
                 break
 
-    print("Battleship ultimate!")
+    print("Battleship ultimate!\n")
     turns = 10
 
     # Loop until the player makes correct guesses. Allowed 10 turns.
@@ -135,7 +135,7 @@ def main():
             turns -= 1
 
         if turns == 0:
-            print("You have no chances left!")
+            print("You have no chances left!\n")
 
     print("Game Over")
     # print("Tom's board:")
