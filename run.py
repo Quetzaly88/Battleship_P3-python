@@ -89,16 +89,9 @@ def main():
     random positions ensuring to not have duplicates. Use loops.
     and a range from 1-5.
     """
-    tom_board = TableGame()
     computer_board = TableGame()
+    tom_board = TableGame()
 
-    # On Tom's board, method to return a random integer between(parameter).
-    for _ in range(5):
-        while True:
-            x, y = random.randint(0, 4), random.choice('ABCDE')
-            if (x, y) not in tom_board.ships:
-                tom_board.place_ship(x, y)
-                break
 
     # Return a random integer between(parameter).
     for _ in range(5):
@@ -107,17 +100,26 @@ def main():
             if (x, y) not in computer_board.ships:
                 computer_board.place_ship(x, y)
                 break
+    
+    # On Tom's board, method to return a random integer between(parameter).
+    for _ in range(5):
+        while True:
+            x, y = random.randint(0, 4), random.choice('ABCDE')
+            if (x, y) not in tom_board.ships:
+                tom_board.place_ship(x, y)
+                break
 
     print("Battleship ultimate!")
-    turns = 10
+    turns = 7
 
-    # Loop until the player makes correct guesses. Allowed 10 turns.
+    # Loop until the player makes correct guesses. Allowed 7 turns.
     while turns > 0:
+        print("Computer's board:")
+        computer_board.hide_ships()
+
         print("Let's go!\n")
         tom_board.display_board()
 
-        print("Computer's board:")
-        computer_board.hide_ships()
 
         print("Take your chance and guess where is a battleship\n")
 
