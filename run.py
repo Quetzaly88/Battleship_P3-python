@@ -25,7 +25,6 @@ class TableGame:
             print(" ".join(row))
         print()
 
-
     def place_ship(self, x, y):
         """
         Place a ship on the board and mark position with S,
@@ -68,8 +67,8 @@ class TableGame:
 def ask_user_position():
     """
     Ask user for position using input(). Integer for row and capital
-    letter for column. Return the position as a Tuple. Return an 
-    error message if the input is not between the ones required. 
+    letter for column. Return the position as a Tuple. Return an
+    error message if the input is not between the ones required.
     """
     while True:
         # urge the user for a valid input
@@ -80,7 +79,7 @@ def ask_user_position():
                 raise ValueError
             return row, col
         except ValueError:
-            print("Try again, just the numbers between 0-4 and letters 'ABCDE' are accepted!")
+            print("Try again, insert numbers between 0-4 and letters 'ABCDE'!")
 
 
 def main():
@@ -109,10 +108,10 @@ def main():
                 break
 
     print("Battleship ultimate!")
-    guesses = 0
+    turns = 7
 
     # Loop until the player makes correct guesses. Allowed 5 turns.
-    while guesses < 3:
+    while turns < 7:
         print("Let's go!\n")
         tom_board.display_board()
 
@@ -128,15 +127,18 @@ def main():
             continue
 
         if computer_board.make_move(row_number, column_letter):
-            guesses += 1
+            turns += 1
 
-        if guesses == 3:
-            print("You sunk all the ships!")
+        turns -= 1
+
+        if turns == 0:
+            print("You have no chances left!")
 
     print("Game Over")
-    tom_board.display_board()
+    print("Tom's board:")
+    tom_board.display_board
+    print("computer's board:")
     computer_board.display_board()
-
 
 
 if __name__ == "__main__":
