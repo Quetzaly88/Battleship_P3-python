@@ -68,25 +68,26 @@ TECHNOLOGIES USED
     - The two boards for user and computer are seen in the screen.  
     - The site is avaiable and readable in on all devices. 
     - No errors of indentation were found in "CI Python Linter"
-    - No errors were found in "One Compiler" python. 
+    - In "One Compiler" code tester appears a message "Error: Command failed: timeout 7 python3 main. 
+      py". It's an error that doesn't appear as a big issue. The bugs section in README will cover more of this. 
     
 
 
-![HTML TEST](./assets/readme.files/html.validator.webp)
-![CSS TEST](./assets/readme.files/css.validator.webp)
-![JAVASCRIPT TEST](./assets/readme.files/javascript%20validator.webp)
+![CI lintern TEST](./assets/images/CI%20lintern.webp)
+![One compiler tester](./assets/images/tester.webp)
 
 
     - The lighthouse open source from Chrome ensures that this website is not only fast and efficient but also accessible, SEO-friendly, and adhering to best practices.
 
-![LIGHTHOUSE TEST](./assets/readme.files/lighthouse.webp)
+![LIGHTHOUSE TEST](./assets/images/lighthouseebattleship.webp)
 
 
 
 * Bugs
 
-    I've been correcting and adjusting small mistakes in all the process of this project. 
-    I had a big problem which I was refering to the wrong element and the variables that I had from the beginning were not clear, therfore I had to erase some variables and make a new one just with current question. 
+    The biggest mistake I did was to not use indentation. Then I realized that my project was not running but the tutors helped me. 
+    I still wish to have less functions to avoid repetition but I just need to learn more python to use Refactoring. After this project I will learn more about it. 
+    
     My experience was that I should't create too many variables and better to create them when I need them. 
     I made some improvements and the quiz ended up functioning better.
 
