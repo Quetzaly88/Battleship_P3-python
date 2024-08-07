@@ -25,6 +25,7 @@ class TableGame:
             print(" ".join(row))
         print()
 
+
     def place_ship(self, x, y):
         """
         Place a ship on the board and mark position with S,
@@ -111,8 +112,8 @@ def main():
     guesses = 0
 
     # Loop until the player makes correct guesses. Allowed 5 turns.
-    while guesses < 5:
-        print("You are Tom. This is your board:\n")
+    while guesses < 3:
+        print("Let's go!\n")
         tom_board.display_board()
 
         print("Computer's board:")
@@ -129,12 +130,13 @@ def main():
         if computer_board.make_move(row_number, column_letter):
             guesses += 1
 
-        if guesses == 5:
+        if guesses == 3:
             print("You sunk all the ships!")
 
     print("Game Over")
     tom_board.display_board()
     computer_board.display_board()
+
 
 
 if __name__ == "__main__":
