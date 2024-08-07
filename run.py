@@ -74,7 +74,7 @@ def ask_user_position():
     while True:
         # urge the user for a valid input
         try:
-            row = int(input("Enter row number. (0 to 4): "))
+            row = int(input("Enter row number (0 to 4): "))
             col = input("Enter column letter (A-E): ").upper()
             if row not in range(5) or col not in 'ABCDE':
                 raise ValueError
