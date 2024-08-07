@@ -113,7 +113,7 @@ def main():
 
     # Loop until the player makes correct guesses. Allowed 10 turns.
     while turns > 0:
-        print("Let's go!\n")
+        print("Welcome! This is your board:\n")
         tom_board.display_board()
 
         print("Computer's board:")
