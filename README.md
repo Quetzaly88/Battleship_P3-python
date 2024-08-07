@@ -99,8 +99,10 @@ TECHNOLOGIES USED
       produced a game that became exhausting. The problem if fixed with a limit of gueses of 10. 
 
 * Owner stories 
-    - I'm proud of my work but I understand that the game could have more improvements. The messages  were hard to find, I found myself looking for a message so what I did is to add extra spacing in all the text.  
-    - The target audience will be every person older than 10 years old. I tested it with my child and she was able to play the game. 
+
+    For me Python is easier to read and write. It's a more understandable language and much more fun to work with. I'm looking foward on taking a specialization on this language. 
+    I'm proud of my work but I understand that the game could have more improvements. The messages  were hard to find, I found myself looking for a message so what I did is to add extra spacing in all the text.  
+    The target audience will be every person older than 10 years old. I tested it with my child and she was able to play the game. 
 
 * Deployment
 
@@ -123,51 +125,46 @@ TECHNOLOGIES USED
 
 * Code Used
 
-    Most of the code I used was from my notes, the Stack overflow site, and the Love Maths project. 
-    I realized that is hard to use the exact code from Replit because AI gives unacurate suggestions and I can't trust it. 
-    Some code that was auto filling or giving sugentions are useful fot time management but many times was very unacurate. 
-    I had assesory from a private teacher in Sweden (Superproff).  He made me think about several things that I could change so my project won't have too many functions and variables. 
-
-
+    I wrote most of the code but I checked the previous exercises with loopd in the theory. 
+    I was looking for ideas and inspiration and I found "dmoisset/battleship-dojo" on github, I dodn't copy the code directly but I adapted some of its code in my project. The idea of having boxes was great but I did my own instead. 
+    The one compiter and CI lintern helped me adjust and fix the code. The Error messages are very helpful. 
+    I've been working on the 100 days of coding in Udemy. I purchase this course from Dr. Angela Yu. 
 
 CREDITS
 
-- Wellesley Education. Helped me understand the functions on Javascript. 
-    https://cs.wellesley.edu/~cs115/readings/more-functions.html#fig4
-- Kevin Powell CSS. 
-    https://youtu.be/3elGSZSWTbM?feature=shared
-- Superproff private teachers. 
-    https://www.superprof.se/
-- Freecode camp. I've been practicing javascript in their website. Freecode camp helped me code while I was applying theory from Code Institute. I used this website and Freecodecamp to practice and learn more.
-    https://www.freecodecamp.org/news/how-to-loop-through-an-array-in-javascript-js-iterate-tutorial/
-    https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/
-    https://youtu.be/le-URjBhevE?feature=shared
-- Developer Mozilla. Helped me understand the event listener for my log-in form. 
-    https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-- Replit. Helped me to write my code before I used gitpod. 
-    https://replit.com/
-- Stack Overflow. It works almost like slack. Here I found a lot of questions and answers about javascript. 
-    https://stackoverflow.com/
-- Chrome Devtools. As I'm still learning how to use them this is a great tool to see mistakes and improve them. 
-- Pomodoro focus helped me have breaks and time to focus so my body doesn't get so stressed. 
-    https://pomofocus.io/
+- CI lintern. 
+    (https://pep8ci.herokuapp.com/)
+    
+- I've been working on the 100 days of coding in Udemy. I purchase this course from Dr. Angela Yu. 
+    (https://www.udemy.com/share/103IHM3@LSb44Ppc1io0Phvhc0EZ9mIfy1O6bTGmTtNQx3xWUywQ5Pkh3jLvZf9qvBGQu2ku/)
 
+- Freecode camp. I've been practicing a little bit of python in their website. 
+   (https://www.freecodecamp.org/learn/scientific-computing-with-python/)
+
+- Slack. Here I found a lot of questions and answers about python and the challenges. 
+
+- Pomodoro focus helped me have breaks and time to focus so my body doesn't get so stressed. 
+    (https://pomofocus.io/)
+
+- I learned more about indentation. 
+    (https://realpython.com/python-pep8/)
+
+- Most of my questions were answered in W3 schools. 
+    (https://www.w3schools.com/python/)
 
 
 MEDIA CONTENT
 
 - Mock up: https://ui.dev/amiresponsive
-- Palette colors: https://coolors.co/
-- Fonts: https://fonts.google.com/specimen/Exo+2?stroke=Sans+Serif&query=exo+2
-- Fav icons: https://icons8.com/icons/set/quiz
 - Webp converter app. https://anywebp.com/
-- Wireframe: https://www.figma.com/design/bl6DMXwtOLRpX6XjRXwDif/Untitled?t=fSNs9KADQaAGOnzS-0
-
+- Wireframe/flowchart. https://app.diagrams.net/
+- Validator. https://onecompiler.com/python/42ndghjhv
 
 
 ACNOWLEDGEMENTS
 
-    I want to thank specially to Tarek Bermalm. He is my private teacher in Sweden. He was a big support, he explained me details that hepled me understand and learn more. 
+    I want to thank the Udemy course and Anna Grieves for the good explanation on Python code. The walk through project was well explained as it was the deployment process. The tutors were there to help me when I needed. 
+    I'm proud of myself for being able to learn more and apply everything I learned from the previous projects. I'm faster in my typing and I can find ansers to my questions easier than before. 
 
 
    
