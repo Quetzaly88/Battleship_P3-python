@@ -108,10 +108,10 @@ def main():
                 break
 
     print("Battleship ultimate!")
-    turns = 7
+    turns = 10
 
-    # Loop until the player makes correct guesses. Allowed 5 turns.
-    while turns < 7:
+    # Loop until the player makes correct guesses. Allowed 10 turns.
+    while turns > 0:
         print("Let's go!\n")
         tom_board.display_board()
 
@@ -127,7 +127,11 @@ def main():
             continue
 
         if computer_board.make_move(row_number, column_letter):
-            turns += 1
+            if not computer_board.ships:
+                print("You sunk all the ships!")
+                break
+        else:
+            turns -= 1
 
         turns -= 1
 
@@ -135,9 +139,9 @@ def main():
             print("You have no chances left!")
 
     print("Game Over")
-    print("Tom's board:")
+    # print("Tom's board:")
     tom_board.display_board
-    print("computer's board:")
+    # print("computer's board:")
     computer_board.display_board()
 
 
