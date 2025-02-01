@@ -1,17 +1,15 @@
-
-
 import random
 
-
+# class representing the game logic
 class TableGame:
-
     def __init__(self):
         """
         Start the board with a dictionary with tuples (x,y).
         X are numbers from 0-4 and y are letters A-E. Use * as empty spot.
         """
         self.grid = {(x, y): "*" for x in range(5) for y in 'ABCDE'}
-        self.ships = []
+        self.ships = [] #list to store ship positions
+        self.guesses = [] #track guesses to avoid repeats
 
     def display_board(self):
         """
@@ -82,25 +80,33 @@ def ask_user_position():
         except ValueError:
             print("Try again, insert numbers between 0-4 and letters 'ABCDE'!\n")
 
+#function for the computer. Ensures new moves every timee. 
+def computer_guess(previous_guesses):
+    while True:
+        x = random.randit(0, 4)
+        y = random.choice('ABCDE')
+        if (x, y) not in previous_guesses:
+            return x, y
 
+# Main game loop
 def main():
     """
     Create board for two users. A person and the computer. Generate
     random positions ensuring to not have duplicates. Use loops.
     and a range from 1-5.
     """
-    tom_board = TableGame()
+    user_board = TableGame()
     computer_board = TableGame()
 
-    # On Tom's board, method to return a random integer between(parameter).
+    # On user's board, method to return a random integer between(parameter).
     for _ in range(5):
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
-            if (x, y) not in tom_board.ships:
-                tom_board.place_ship(x, y)
+            if (x, y) not in user_board.ships:
+                user_board.place_ship(x, y)
                 break
 
-    # Return a random integer between(parameter).
+    # Place 5 ships randomly on the computer's board.
     for _ in range(5):
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
@@ -113,20 +119,22 @@ def main():
 
     # Loop until the player makes correct guesses. Allowed 10 turns.
     while turns > 0:
-        print("Welcome! This is your board:\n")
-        tom_board.display_board()
+        print("Your board:")
+        user_board.display_board()
 
         print("Computer's board:")
         computer_board.hide_ships()
 
-        print("Take your chance and guess where is a battleship\n")
-
+        #user's turn
+        print("Yout turn to guess:\n")
         row_number, column_letter = ask_user_position()
 
+        # Check if position is free
         if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
             print("That place is taken")
             continue
-
+        
+        # User's guess
         if computer_board.make_move(row_number, column_letter):
             if not computer_board.ships:
                 print("You sunk all the ships!")
@@ -134,15 +142,38 @@ def main():
         else:
             turns -= 1
 
+        # Computer's turn
+        print("Computer's turn:")
+        comp_row, comp_col = computer_guess(user_board.guesses)
+        user_board.guesses.append((comp_row, comp_col)) #record the guess
+
+        print("Computer's guessed: {comp_row}{comp_col}")
+        if user_board.make_move(comp_row, comp_col):
+            if not user_board.ships:
+                print("The computer sunk all your ships.")
+                break
+
         if turns == 0:
             print("You have no chances left!\n")
+            break
 
-    print("Game Over")
-    # print("Tom's board:")
-    tom_board.display_board
-    # print("computer's board:")
+    # Display the results
+    print("Final Boards: ")
+    print("Your Board: ")
+    user_board.display_board
+
+    print("computer's board:")
     computer_board.display_board()
 
-
+# Entry point of the program
 if __name__ == "__main__":
     main()
+
+#     print("Game Over")
+#     # print("Tom's board:")
+#     tom_board.display_board
+#     # print("computer's board:")
+#     computer_board.display_board()
+
+
+
