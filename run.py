@@ -72,18 +72,28 @@ def ask_user_position():
     while True:
         # urge the user for a valid input
         try:
-            row = int(input("Enter row number (0 to 4): "))
-            col = input("Enter column letter (A-E): ").upper()
-            if row not in range(5) or col not in 'ABCDE':
-                raise ValueError
-            return row, col
-        except ValueError:
-            print("Try again, insert numbers between 0-4 and letters 'ABCDE'!\n")
+            row_input = input("Enter row number (0 to 4): ").strip()
+            col_input = input("Enter column letter (A-E): ").strip().upper()
+            
+            # Validate if the row is an integer
+            if not row_input.isdigit():
+                raise ValueError("Row must be a number between 0 and 4.")
+            
+            row = int(row_input)
+
+            # Validate row and column range
+            if row not in range(5) or col_input not in 'ABCDE':
+                raise ValueError("Coordinates out of range.")
+            
+            return row, col_input
+        
+        except ValueError as e:
+            print(f"Invalud input: {e}. Please try again.\n")
 
 #function for the computer. Ensures new moves every timee. 
 def computer_guess(previous_guesses):
     while True:
-        x = random.randit(0, 4)
+        x = random.randint(0, 4)
         y = random.choice('ABCDE')
         if (x, y) not in previous_guesses:
             return x, y
@@ -115,17 +125,18 @@ def main():
                 break
 
     print("Battleship ultimate!\n")
-    turns = 10
+    rounds = 10
 
-    # Loop until the player makes correct guesses. Allowed 10 turns.
-    while turns > 0:
+    # Loop until the player makes correct guesses. Allowed 10 rounds.
+    while rounds > 0:
+        print(f"\n-- Round {11 - rounds} ---")
         print("Your board:")
         user_board.display_board()
 
         print("Computer's board:")
         computer_board.hide_ships()
 
-        #user's turn
+        # User's turn
         print("Yout turn to guess:\n")
         row_number, column_letter = ask_user_position()
 
@@ -147,7 +158,7 @@ def main():
         comp_row, comp_col = computer_guess(user_board.guesses)
         user_board.guesses.append((comp_row, comp_col)) #record the guess
 
-        print("Computer's guessed: {comp_row}{comp_col}")
+        print(f"Computer guessed: {comp_row}{comp_col}")
         if user_board.make_move(comp_row, comp_col):
             if not user_board.ships:
                 print("The computer sunk all your ships.")
@@ -168,12 +179,4 @@ def main():
 # Entry point of the program
 if __name__ == "__main__":
     main()
-
-#     print("Game Over")
-#     # print("Tom's board:")
-#     tom_board.display_board
-#     # print("computer's board:")
-#     computer_board.display_board()
-
-
-
+    
