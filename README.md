@@ -3,7 +3,9 @@
 Project 3
 Code Institute
 
-    This project has the workspace template from Code Institute. It's a simple battleship game using exclusively Python code. This game includes: two boards, one for the computer and one for a user. Ten oportunities to guess and hit the ships. The computer's ships are hidden and the hits and misses have the X symbol and - symbol respective . At the end a message "Game Over" will be printed and the hits, misses and Ships that were in the board will be shown. 
+    This project has the workspace template from Code Institute. It's a simple battleship game using Python. This game includes: two boards, one for the computer and one for a user. Ten oportunities to guess and hit the ships. The computer's ships are hidden and the hits and misses have the X symbol and - symbol respective . 
+    
+    In this updated version, the computer also takes turns guessing the user's ships, and the game announces the winner based on who sinks all the opponent's ships first. If all turns are used without either side sinking all ships, the game will determine the winner based on the remaining ships or declare a draw.
 
 
 ![mockup](./assets/images/mockup.webp)
@@ -26,11 +28,10 @@ FEATURES
 
 * The two game boards:
 
-    In the beginning we have the two game boards. One for the user and the another for the computer.  
-    The columns are marked with letters and the rows with numbers 0-4. Here I used just five rows and five columns to make the game easier. 
-
-    The user board has "S" that means where the ships are. 
-
+    * The game starts with two boards: one for the user and one for the computer.
+    * The columns are marked with letters (A-E), and the rows are numbered 0-4.
+    * The user's board shows "S" to indicate ship locations.
+    * The computer's board hides its ships, and the user has to guedd their locations. 
 
 
 ![user board](./assets/images/tom_board.webp)
@@ -57,6 +58,13 @@ FEATURES
 
 
     The user has 10 turns until the ships are founded. If all the turns are finished the "Game Over" message will show. 
+
+GAMEPLAY ENHANCEMENTS:
+
+    * During the game, the user will be prompted: "
+
+
+
 
 
 
