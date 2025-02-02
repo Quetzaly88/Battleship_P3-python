@@ -75,6 +75,10 @@ def ask_user_position():
             row_input = input("Enter row number (0 to 4): ").strip()
             col_input = input("Enter column letter (A-E): ").strip().upper()
             
+            # Check for empty input
+            if not row_input or not col_input:
+                raise ValueError("Both row and column inputs are required.")
+
             # Validate if the row is an integer
             if not row_input.isdigit():
                 raise ValueError("Row must be a number between 0 and 4.")
@@ -88,7 +92,7 @@ def ask_user_position():
             return row, col_input
         
         except ValueError as e:
-            print(f"Invalud input: {e}. Please try again.\n")
+            print(f"Invalid input: {e}. Please try again.\n")
 
 #function for the computer. Ensures new moves every timee. 
 def computer_guess(previous_guesses):
@@ -138,21 +142,21 @@ def main():
 
         # User's turn
         print("Yout turn to guess:\n")
-        row_number, column_letter = ask_user_position()
+        while True:
+            row_number, column_letter = ask_user_position()
 
-        # Check if position is free
-        if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
-            print("That place is taken")
-            continue
-        
+            # Check if position is free
+            if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
+                print("That place is taken")
+            else:
+                break #valid move
+          
         # User's guess
         if computer_board.make_move(row_number, column_letter):
             if not computer_board.ships:
                 print("You sunk all the ships!")
                 break
-        else:
-            turns -= 1
-
+        
         # Computer's turn
         print("Computer's turn:")
         comp_row, comp_col = computer_guess(user_board.guesses)
@@ -164,11 +168,14 @@ def main():
                 print("The computer sunk all your ships.")
                 break
 
-        if turns == 0:
+        rounds -= 1
+
+        if rounds == 0:
             print("You have no chances left!\n")
             break
 
     # Display the results
+    
     print("Final Boards: ")
     print("Your Board: ")
     user_board.display_board
@@ -179,4 +186,3 @@ def main():
 # Entry point of the program
 if __name__ == "__main__":
     main()
-    
