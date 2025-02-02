@@ -15,7 +15,7 @@ class TableGame:
         """
         Display the board with all elements (ships, hits, misses).
         """
-        print(" A B C D E")
+        print("  A B C D E")
         for x in range(5):
             row = [str(x)]
             for y in 'ABCDE':
@@ -36,7 +36,7 @@ class TableGame:
         Display the board with ships hidden.
         Function used from display_board function.
         """
-        print(" A B C D E")
+        print("  A B C D E")
         for x in range(5):
             row = [str(x)]
             for y in 'ABCDE':
@@ -171,14 +171,20 @@ def main():
         rounds -= 1
 
         if rounds == 0:
-            print("You have no chances left!\n")
+            print("\Game over!")
+            if len(user_board.ships) > len(computer_board.ships):
+                print("You win by having more ships left!")
+            elif len(computer_board.ships) > len(user_board.ships):
+                print("The computer wins with more ships left!")
+            else:
+                print("It's a tie! Both players have the same number of ships!")
             break
 
     # Display the results
     
     print("Final Boards: ")
     print("Your Board: ")
-    user_board.display_board
+    user_board.display_board()
 
     print("computer's board:")
     computer_board.display_board()
