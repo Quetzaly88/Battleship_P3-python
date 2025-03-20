@@ -10,8 +10,8 @@ class TableGame:
         X are numbers from 0-4 and y are letters A-E. Use * as empty spot.
         """
         self.grid = {(x, y): "*" for x in range(5) for y in 'ABCDE'}
-        self.ships = []  #list to store ship positions
-        self.guesses = []  #track guesses to avoid repeats
+        self.ships = []  # list to store ship positions
+        self.guesses = []  # track guesses to avoid repeats
 
     def display_board(self):
         """
@@ -27,16 +27,15 @@ class TableGame:
 
     def place_ship(self, x, y):
         """
-        Place a ship on the board and mark position with S,
-        representing the Ship on the board.
+        Place a ship at the given coordinates. Use 'S' 
+        to represent a ship.
         """
         self.grid[(x, y)] = 'S'
         self.ships.append((x, y))
 
     def hide_ships(self):
         """
-        Display the board with ships hidden.
-        Function used from display_board function.
+        Display the board without revealing ships.
         """
         print("  A B C D E")
         for x in range(5):
@@ -51,8 +50,7 @@ class TableGame:
 
     def make_move(self, x, y):
         """
-        Make a move using the two coordinates. If a ship is hit then
-        use 'X'. If is a missmark with '-'.
+        Processes a move: Hits ('X') or Misses ('-') a ship.
         """
         if self.grid[(x, y)] == 'S':
             print("HIT!")
@@ -67,16 +65,14 @@ class TableGame:
 
 def ask_user_position():
     """
-    Ask user for position using input(). Integer for row and capital
-    letter for column. Return the position as a Tuple. Return an
-    error message if the input is not between the ones required.
+    Asks user for a position on the board. Validates the input.
     """
     if not sys.stdin.isatty():  # if running in Heroku(non-interactive mode)
         print("\nThis game requires user input. Please run it locally")
         exit()
-        
+
+
     while True:
-        # urge the user for a valid input
         try:
             row_input = input("Enter row number (0 to 4) or type 'exit' to quit: ").strip()
             if row_input.lower() == 'exit':
@@ -88,11 +84,11 @@ def ask_user_position():
                 print("\nGame exited. Goodbye!")
                 exit()
 
-            # Check for empty input
-            if not row_input or not col_input:
-                raise ValueError("Both row and column inputs are required.")
+            # # Check for empty input
+            # if not row_input or not col_input:
+            #     raise ValueError("Both row and column inputs are required.")
 
-            # Validate if the row is an integer
+            # Validate row is input
             if not row_input.isdigit():
                 raise ValueError("Row must be a number between 0 and 4.")
 
@@ -110,10 +106,14 @@ def ask_user_position():
 
 # function for the computer. Ensures new moves every time.
 def computer_guess(previous_guesses):
+    """
+    Generates a unique random guess for the computer.
+    """
     while True:
         x = random.randint(0, 4)
         y = random.choice('ABCDE')
         if (x, y) not in previous_guesses:
+            previous_guesses.append((x, y))
             return x, y
 
 
@@ -146,13 +146,12 @@ def main():
     print("Battleship ultimate!\n")
     rounds = 10
 
-    # Loop until the player makes correct guesses. Allowed 10 rounds.
     while rounds > 0:
         print(f"\n-- Round {11 - rounds} ---")
         print("Your board:")
         user_board.display_board()
 
-        print("Computer's board:")
+        print("Computer's board: (hidden ships):")
         computer_board.hide_ships()
 
         # User's turn
@@ -162,26 +161,25 @@ def main():
 
             # Check if position is free
             if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
-                print("That place is taken")
+                print("Try again. You've already guessed that position.")
             else:
-                break  #valid move
-          
+                break  # Valid move
+
         # User's guess
         if computer_board.make_move(row_number, column_letter):
             if not computer_board.ships:
-                print("You sunk all the ships!")
+                print("Congratulations! You sunk all the ships!")
                 break
-        
+
         # Computer's turn
         print("Computer's turn:")
         comp_row, comp_col = computer_guess(user_board.guesses)
-        user_board.guesses.append((comp_row, comp_col))  #record the guess
 
         print(f"Computer guessed: {comp_row}{comp_col}")
         if user_board.make_move(comp_row, comp_col):
             if not user_board.ships:
-                print("The computer sunk all your ships.")
-                break
+                print("\nThe computer sunk all your ships.")
+                return  # end the game if player loses
 
         rounds -= 1
 
