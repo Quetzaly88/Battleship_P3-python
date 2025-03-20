@@ -1,4 +1,5 @@
 import random
+import sys
 
 
 # class representing the game logic
@@ -70,6 +71,10 @@ def ask_user_position():
     letter for column. Return the position as a Tuple. Return an
     error message if the input is not between the ones required.
     """
+    if not sys.stdin.isatty():  # if running in Heroku(non-interactive mode)
+        print("\nThis game requires user input. Please run it locally")
+        exit()
+        
     while True:
         # urge the user for a valid input
         try:
@@ -77,7 +82,7 @@ def ask_user_position():
             if row_input.lower() == 'exit':
                 print("\nGame exited. Goodbye!")
                 exit()
-    
+
             col_input = input("Enter column letter (A-E): ").strip().upper()
             if col_input.lower() == 'exit':
                 print("\nGame exited. Goodbye!")
@@ -110,6 +115,7 @@ def computer_guess(previous_guesses):
         y = random.choice('ABCDE')
         if (x, y) not in previous_guesses:
             return x, y
+
 
 # Main game loop
 def main():
