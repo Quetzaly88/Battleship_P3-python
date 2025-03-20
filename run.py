@@ -77,7 +77,7 @@ def ask_user_position():
             if row_input.lower() == 'exit':
                 print("\nGame exited. Goodbye!")
                 exit()
-                
+    
             col_input = input("Enter column letter (A-E): ").strip().upper()
             if col_input.lower() == 'exit':
                 print("\nGame exited. Goodbye!")
