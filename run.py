@@ -13,15 +13,18 @@ class TableGame:
         self.ships = []  # list to store ship positions
         self.guesses = []  # track guesses to avoid repeats
 
-    def display_board(self):
+    def display_board(self, hide_ships=False):
         """
-        Display the board with all elements (ships, hits, misses).
+        Display the boar. Hide ships if specified.
         """
         print("  A B C D E")
         for x in range(5):
             row = [str(x)]
             for y in 'ABCDE':
-                row.append(self.grid[(x, y)])
+                if hide_ships and self.grid[(x, y)] == 'S':
+                    row.append("*")
+                else:
+                    row.append(self.grid[(x, y)])
             print(" ".join(row))
         print()
 
@@ -33,20 +36,20 @@ class TableGame:
         self.grid[(x, y)] = 'S'
         self.ships.append((x, y))
 
-    def hide_ships(self):
-        """
-        Display the board without revealing ships.
-        """
-        print("  A B C D E")
-        for x in range(5):
-            row = [str(x)]
-            for y in 'ABCDE':
-                if self.grid[(x, y)] == 'S':
-                    row.append("*")
-                else:
-                    row.append(self.grid[(x, y)])
-            print(" ".join(row))
-        print()
+    # def hide_ships(self):
+    #     """
+    #     Display the board without revealing ships.
+    #     """
+    #     print("  A B C D E")
+    #     for x in range(5):
+    #         row = [str(x)]
+    #         for y in 'ABCDE':
+    #             if self.grid[(x, y)] == 'S':
+    #                 row.append("*")
+    #             else:
+    #                 row.append(self.grid[(x, y)])
+    #         print(" ".join(row))
+    #     print()
 
     def make_move(self, x, y):
         """
@@ -84,21 +87,10 @@ def ask_user_position():
                 print("\nGame exited. Goodbye!")
                 exit()
 
-            # # Check for empty input
-            # if not row_input or not col_input:
-            #     raise ValueError("Both row and column inputs are required.")
-
-            # Validate row is input
-            if not row_input.isdigit():
-                raise ValueError("Row must be a number between 0 and 4.")
-
-            row = int(row_input)
-
-            # Validate row and column range
-            if row not in range(5) or col_input not in 'ABCDE':
+            if not row_input.isdigit() or int (row_input) not in range(5) or col_input not in 'ABCDE':
                 raise ValueError("Provide a valid column letter (A-E) and row number (0-4).")
 
-            return row, col_input
+            return int(row_input), col_input
 
         except ValueError as e:
             print(f"Invalid input: {e}. Please try again.\n")
@@ -150,20 +142,17 @@ def main():
         print(f"\n-- Round {11 - rounds} ---")
         print("Your board:")
         user_board.display_board()
-
-        print("Computer's board: (hidden ships):")
-        computer_board.hide_ships()
+        print("Computer's board (hidden ships):")
+        computer_board.display_board(hide_ships=True)
 
         # User's turn
         print("Your turn to guess:\n")
         while True:
             row_number, column_letter = ask_user_position()
-
-            # Check if position is free
             if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
                 print("Try again. You've already guessed that position.")
             else:
-                break  # Valid move
+                break
 
         # User's guess
         if computer_board.make_move(row_number, column_letter):
@@ -174,12 +163,12 @@ def main():
         # Computer's turn
         print("Computer's turn:")
         comp_row, comp_col = computer_guess(user_board.guesses)
-
         print(f"Computer guessed: {comp_row}{comp_col}")
+
         if user_board.make_move(comp_row, comp_col):
             if not user_board.ships:
                 print("\nThe computer sunk all your ships.")
-                return  # end the game if player loses
+                return  # END GAME
 
         rounds -= 1
 
@@ -193,13 +182,10 @@ def main():
                 print("It's a tie! Both players have the same number of ships!")
             break
 
-    # Display the results
-
     print("Final Boards: ")
     print("Your Board: ")
     user_board.display_board()
-
-    print("computer's board:")
+    print("computer's board (Final State):")
     computer_board.display_board()
 
 # Entry point of the program
