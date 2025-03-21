@@ -1,1 +1,1 @@
-web: python3 run.py
+web: echo "This game requires user input. Please run it locally."

@@ -5,7 +5,13 @@ Code Institute
 
     This project has the workspace template from Code Institute. It's a simple battleship game using Python. This game includes: two boards, one for the computer and one for a user. Ten oportunities to guess and hit the ships. The computer's ships are hidden and the hits and misses have the X symbol and - symbol respective . 
     
-    In this updated version, the computer also takes turns guessing the user's ships, and the game announces the winner based on who sinks all the opponent's ships first. If all turns are used without either side sinking all ships, the game will determine the winner based on the remaining ships or declare a draw.
+**Updated version**
+    - The computer makes its own guesses against the players.
+    - The winner is declared based on who sinks all the opponent's ships first, or who has more remaining after 10 rounds. 
+    - Enhanced input validation and user feedback improve gameplay. 
+
+    /////
+    , the computer also takes turns guessing the user's ships, and the game announces the winner based on who sinks all the opponent's ships first. If all turns are used without either side sinking all ships, the game will determine the winner based on the remaining ships or declare a draw.
 
 
 ![mockup](./assets/images/mockup.webp)
@@ -16,7 +22,7 @@ DESIGN
 There is no special design for this project because it's been exlusiveky focused on Python the language and its functionality. The background color is only taken from the Code Institute template for this project. 
 
 
-WIREFRAMES / FLOWCHART
+FLOWCHART
 
     In this project I've used and created the flowchart with draw.io. The flowchart shows the steps taken to accomplish the battle game and the important steps for functionality.  
 
@@ -24,25 +30,25 @@ WIREFRAMES / FLOWCHART
 
 
 
-FEATURES
+FEATURES (Updated)
 
-* The two game boards:
-
-    * The game starts with two boards: one for the user and one for the computer.
-    * The columns are marked with letters (A-E), and the rows are numbered 0-4.
-    * The user's board shows "S" to indicate ship locations.
-    * The computer's board hides its ships, and the user has to guedd their locations. 
+**The two game boards:**
+    - The game starts with two boards: one for the user and one for the computer.
+    - 5 X 5 Grid. The columns are marked with letters (A-E), and the rows are numbered 0-4.
+    - The user's board shows "S" to indicate ship locations.
+    - The computer's board hides its ships.
 
 
 ![user board](./assets/images/tom_board.webp)
-
-
-
-    The computer board has the ships hidden and the user has to guess where the ships are. 
-
-
-
 ![computer board](./assets/images/computer_board.webp)
+
+**User guessing system**
+    - The imputs are validated. Only numbers 0-4 and letters A-E are accepted.
+    - If there are invalid inputs the game provides feedback. 
+
+**End game logic**
+    - User or computer wins by sinking all ships. 
+    - The game when the 10 rounds are finished or when the player writes "exit"
 
 
 

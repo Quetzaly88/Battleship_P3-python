@@ -1,5 +1,10 @@
-import random
+import os
 import sys
+import random
+
+if "DYNO" in os.environ:
+    print("This game requires user input. Please run it locally")
+    exit()
 
 
 # class representing the game logic
@@ -30,7 +35,7 @@ class TableGame:
 
     def place_ship(self, x, y):
         """
-        Place a ship at the given coordinates. Use 'S' 
+        Place a ship at the given coordinates. Use 'S'
         to represent a ship.
         """
         self.grid[(x, y)] = 'S'
@@ -73,7 +78,6 @@ def ask_user_position():
     if not sys.stdin.isatty():  # if running in Heroku(non-interactive mode)
         print("\nThis game requires user input. Please run it locally")
         exit()
-
 
     while True:
         try:
@@ -187,6 +191,7 @@ def main():
     user_board.display_board()
     print("computer's board (Final State):")
     computer_board.display_board()
+
 
 # Entry point of the program
 if __name__ == "__main__":
