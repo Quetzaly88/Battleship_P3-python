@@ -61,20 +61,27 @@ def get_input(prompt):
 def ask_user_position():
     while True:
         try:
-            row_input = get_input("Enter row number (0 to 4) or type exit to quit: ")
+            row_input = get_input("Enter row number (0 to 4) or type exit to quit: ").strip()
             if row_input.lower() == 'exit':
                 print("Game exited. Goodbye!")
                 sys.exit()
 
-            col_input = get_input("Enter column letter (A to E): ").upper()
-            if col_input.lower() == 'exit':
+            if not row_input.isdigit() or int(row_input) not in range(5):
+                raise ValueError("Provide a valid row number (0-4).")
+            row = int(row_input)
+
+            # Ask for column letter
+            col_input = get_input("Enter column letter (A to E): ").strip().upper()
+            if col_input.lower() == 'EXIT':
                 print("Game exited. Goodbye!")
                 sys.exit()
 
-            if not row_input.isdigit() or int(row_input) not in range(5) or col_input not in 'ABCDE':
-                raise ValueError("Provide a valid column letter (A-E) and row number (0-4).")
+            if col_input not in 'ABCDE':
+                raise ValueError("Provide a valid column letter (A-E).")
+            col = col_input
 
-            return int(row_input), col_input
+            # Safe return
+            return row, col
 
         except ValueError as e:
             print(f"Invalid input: {e}. Try again.\n")
