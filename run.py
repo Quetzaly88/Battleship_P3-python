@@ -3,44 +3,34 @@ import random
 
 
 class TableGame:
-
     def __init__(self):
-        """
-        Start the board with a dictionary with tuples (x,y).
-        X are numbers from 0-4 and y are letters A-E. Use * as empty spot.
-        """
         self.grid = {(x, y): "*" for x in range(5) for y in 'ABCDE'}
         self.ships = []
         self.guesses = []
 
     def display_board(self, hide_ships=False):
-        """
-        Display the board with all elements (ships, hits, misses).
-        """
-        print(" A B C D E")
+        board = "  A B C D E\n"
         for x in range(5):
             row = [str(x)]
             for y in 'ABCDE':
-                # Hides ships unless specified
-                if hide_ships and self.grid[(x, y)] == 'S':
-                    row.append("*")
-                else:
-                    row.append(self.grid[(x, y)])
-            print(" ".join(row))
-        print()
+                cell = self.grid[(x, y)]
+                row.append("*" if hide_ships and cell == 'S' else cell)
+            board += " ".join(row) + "\n"
+        print(board)
+
+        #     for y in 'ABCDE':
+        #         if hide_ships and self.grid[(x, y)] == 'S':
+        #             row.append("*")
+        #         else:
+        #             row.append(self.grid[(x, y)])
+        #     print(" ".join(row))
+        # print()
 
     def place_ship(self, x, y):
-        """
-        Place a ship on the board and mark position with S,
-        representing the Ship on the board.
-        """
         self.grid[(x, y)] = 'S'
         self.ships.append((x, y))
 
     def make_move(self, x, y):
-        """
-        Processes a move: Hits ('X') or Misses ('-') a ship.
-        """
         if self.grid[(x, y)] == 'S':
             print("HIT!")
             self.grid[(x, y)] = 'X'
@@ -52,20 +42,19 @@ class TableGame:
             return False
 
 
-# Use readline instead of input() to receive data over socket stream
 def get_input(prompt):
-    print(prompt, end="", flush=True)
+    print(prompt, end='', flush=True)
     return sys.stdin.readline().strip()
 
 
 def ask_user_position():
     while True:
         try:
+            # Ask for row number
             row_input = get_input("Enter row number (0 to 4) or type exit to quit: ").strip()
             if row_input.lower() == 'exit':
                 print("Game exited. Goodbye!")
                 sys.exit()
-
             if not row_input.isdigit() or int(row_input) not in range(5):
                 raise ValueError("Provide a valid row number (0-4).")
             row = int(row_input)
@@ -75,12 +64,10 @@ def ask_user_position():
             if col_input.lower() == 'EXIT':
                 print("Game exited. Goodbye!")
                 sys.exit()
-
             if col_input not in 'ABCDE':
                 raise ValueError("Provide a valid column letter (A-E).")
             col = col_input
 
-            # Safe return
             return row, col
 
         except ValueError as e:
@@ -119,14 +106,15 @@ def main():
 
 # Main gameplay loop
     while rounds > 0:
-        print(f"\n-- Round {11 - rounds} ---")
+        print(f"-- Round {11 - rounds} --")
         print("Your board:")
         user_board.display_board()
+
         print("Computer's board (hidden ships):")
         computer_board.display_board(hide_ships=True)
 
         # User move
-        print ("Your turn:")
+        print("Your turn:")
         while True:
             row_number, column_letter = ask_user_position()
             if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
@@ -138,7 +126,7 @@ def main():
             if not computer_board.ships:
                 print("You've sunk all the ships! You win!")
                 break
-        
+
         # Computer's turn
         print("Computer's turn:")
         comp_row, comp_col = computer_guess(user_board.guesses)
@@ -148,7 +136,7 @@ def main():
             if not user_board.ships:
                 print("All your ships have been sunk! You lose!")
                 break
-        
+
         rounds -= 1
 
         if rounds == 0:
@@ -162,11 +150,12 @@ def main():
             break
 
     # Show the final boards
-    print("\nFinal boards:")
+    print("Final boards:")
     print("Your board:")
     user_board.display_board()
     print("Computer's board (Final State):")
     computer_board.display_board()
+
 
 if __name__ == "__main__":
     main()
