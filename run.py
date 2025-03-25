@@ -21,8 +21,11 @@ class TableGame:
         for x in range(5):
             row = [str(x)]
             for y in 'ABCDE':
-                cell = self.grid[(x, y)]
-                row.append("*" if hide_ships and cell == 'S' else cell)
+                # Hides ships unless specified
+                if hide_ships and self.grid[(x, y)] == 'S':
+                    row.append("*")
+                else:
+                    row.append(self.grid[(x, y)])
             print(" ".join(row))
         print()
 
@@ -57,55 +60,51 @@ def ask_user_position():
     """
     if not sys.stdin.isatty():  # If running in Heroku or non-interactive terminal
         print("\nThis game requires user input. Please run it locally.")
-        exit()
+        exit()  # Heroku compatibility check — exits if run non-interactively
 
     while True:
-        # urge the user for a valid input
         try:
             row_input = input("Enter row number (0 to 4) or type exit to quit: ").strip()
             if row_input.lower() == 'exit':
-                print("Goodbye!")
+                print("\nGame exited. Goodbye!")
                 exit()
 
             col_input = input("Enter column letter (A to E): ").strip().upper()
             if col_input.lower() == 'exit':
-                print("Goodbye!")
+                print("\nGame exited. Goodbye!")
                 exit()
 
             if not row_input.isdigit() or int(row_input) not in range(5) or col_input not in 'ABCDE':
-                raise ValueError("Invalid input")
+                raise ValueError("Provide a valid column letter (A-E) and row number (0-4).")
 
             return int(row_input), col_input
 
         except ValueError as e:
             print(f"Invalid input: {e}. Try again.\n")
 
-
+def computer_guess(previeus_guesses):
+    """
+    Generate a random guess for the computer. Ensure to not have duplicates.
+    """
+    while True:
+        x = random.randint(0, 4)
+        y = random.choice('ABCDE')
+        if (x, y) not in previeus_guesses:
+            previeus_guesses.append((x, y))
+            return x, y
+        
 
 def main():
-    """
-    Create board for two users. A person and the computer. Generate
-    random positions ensuring to not have duplicates. Use loops.
-    and a range from 1-5.
-    """
     user_board = TableGame()
     computer_board = TableGame()
-
-    # Place 5 ships on each board
-    place_random_ships(user_board)
-    place_random_ships(computer_board)
-
-    print("Battleship ultimate!\n")
-    rounds = 10
 
     for _ in range(5):
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
-            if (x, y) not in tom_board.ships:
-                tom_board.place_ship(x, y)
+            if (x, y) not in user_board.ships:
+                user_board.place_ship(x, y)
                 break
 
-    # Return a random integer between(parameter).
     for _ in range(5):
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
@@ -113,38 +112,59 @@ def main():
                 computer_board.place_ship(x, y)
                 break
 
-    # Loop until the player makes correct guesses. Allowed 10 turns.
-    while turns > 0:
-        print("Welcome! This is your board:\n")
-        tom_board.display_board()
+    print("Battleship ultimate!\n")
+    rounds = 10  # Max number of turns
 
-        print("Computer's board:")
-        computer_board.hide_ships()
+# Main gameplay loop
+    while rounds > 0:
+        print(f"\n-- Round {11 - rounds} ---")
+        print("Your board:")
+        user_board.display_board()
+        print("Computer's board (hidden ships):")
+        computer_board.display_board(hide_ships=True)
 
-        print("Take your chance and guess where is a battleship\n")
-
-        row_number, column_letter = ask_user_position()
-
-        if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
-            print("That place is taken")
-            continue
+        # User move
+        print ("Your turn:")
+        while True:
+            row_number, column_letter = ask_user_position()
+            if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
+                print("You've already guessed this spot. Try again.")
+            else:
+                break
 
         if computer_board.make_move(row_number, column_letter):
             if not computer_board.ships:
-                print("You sunk all the ships!")
+                print("You've sunk all the ships! You win!")
                 break
-        else:
-            turns -= 1
+        
+        # Computer move
+        print("Computer's turn:")
+        comp_row, comp_col = computer_guess(user_board.guesses)
+        print(f"Computer guessed: {comp_row}, {comp_col}")
 
-        if turns == 0:
-            print("You have no chances left!\n")
+        if user_board.make_move(comp_row, comp_col):
+            if not user_board.ships:
+                print("All your ships have been sunk! You lose!")
+                break
+        
+        rounds -= 1
 
-    print("Game Over")
-    # print("Tom's board:")
-    tom_board.display_board
-    # print("computer's board:")
+        if rounds == 0:
+            print("No more rounds left. Game over!")
+            if len(user_board.ships) > len(computer_board.ships):
+                print("You win by having more ships left!")
+            elif len(computer_board.ships) > len(user_board.ships):
+                print("The computer wins with more ships left!")
+            else:
+                print("It's a tie! Both players have the same number of ships!")
+            break
+
+    # Show the final boards
+    print("\nFinal boards:")
+    print("Your board:")
+    user_board.display_board()
+    print("Computer's board (Final State):")
     computer_board.display_board()
-
 
 if __name__ == "__main__":
     main()
