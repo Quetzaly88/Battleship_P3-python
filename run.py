@@ -1,5 +1,4 @@
-
-
+import sys
 import random
 
 
@@ -12,8 +11,9 @@ class TableGame:
         """
         self.grid = {(x, y): "*" for x in range(5) for y in 'ABCDE'}
         self.ships = []
+        self.guesses = []
 
-    def display_board(self):
+    def display_board(self, hide_ships=False):
         """
         Display the board with all elements (ships, hits, misses).
         """
@@ -21,7 +21,8 @@ class TableGame:
         for x in range(5):
             row = [str(x)]
             for y in 'ABCDE':
-                row.append(self.grid[(x, y)])
+                cell = self.grid[(x, y)]
+                row.append("*" if hide_ships and cell == 'S' else cell)
             print(" ".join(row))
         print()
 
@@ -33,26 +34,9 @@ class TableGame:
         self.grid[(x, y)] = 'S'
         self.ships.append((x, y))
 
-    def hide_ships(self):
-        """
-        Display the board with ships hidden.
-        Function used from display_board function.
-        """
-        print(" A B C D E")
-        for x in range(5):
-            row = [str(x)]
-            for y in 'ABCDE':
-                if self.grid[(x, y)] == 'S':
-                    row.append("*")
-                else:
-                    row.append(self.grid[(x, y)])
-            print(" ".join(row))
-        print()
-
     def make_move(self, x, y):
         """
-        Make a move using the two coordinates. If a ship is hit then
-        use 'X'. If is a missmark with '-'.
+        Processes a move: Hits ('X') or Misses ('-') a ship.
         """
         if self.grid[(x, y)] == 'S':
             print("HIT!")
@@ -71,16 +55,31 @@ def ask_user_position():
     letter for column. Return the position as a Tuple. Return an
     error message if the input is not between the ones required.
     """
+    if not sys.stdin.isatty():  # If running in Heroku or non-interactive terminal
+        print("\nThis game requires user input. Please run it locally.")
+        exit()
+
     while True:
         # urge the user for a valid input
         try:
-            row = int(input("Enter row number (0 to 4): "))
-            col = input("Enter column letter (A-E): ").upper()
-            if row not in range(5) or col not in 'ABCDE':
-                raise ValueError
-            return row, col
-        except ValueError:
-            print("Try again, insert numbers between 0-4 and letters 'ABCDE'!\n")
+            row_input = input("Enter row number (0 to 4) or type exit to quit: ").strip()
+            if row_input.lower() == 'exit':
+                print("Goodbye!")
+                exit()
+
+            col_input = input("Enter column letter (A to E): ").strip().upper()
+            if col_input.lower() == 'exit':
+                print("Goodbye!")
+                exit()
+
+            if not row_input.isdigit() or int(row_input) not in range(5) or col_input not in 'ABCDE':
+                raise ValueError("Invalid input")
+
+            return int(row_input), col_input
+
+        except ValueError as e:
+            print(f"Invalid input: {e}. Try again.\n")
+
 
 
 def main():
@@ -89,10 +88,16 @@ def main():
     random positions ensuring to not have duplicates. Use loops.
     and a range from 1-5.
     """
-    tom_board = TableGame()
+    user_board = TableGame()
     computer_board = TableGame()
 
-    # On Tom's board, method to return a random integer between(parameter).
+    # Place 5 ships on each board
+    place_random_ships(user_board)
+    place_random_ships(computer_board)
+
+    print("Battleship ultimate!\n")
+    rounds = 10
+
     for _ in range(5):
         while True:
             x, y = random.randint(0, 4), random.choice('ABCDE')
@@ -107,9 +112,6 @@ def main():
             if (x, y) not in computer_board.ships:
                 computer_board.place_ship(x, y)
                 break
-
-    print("Battleship ultimate!\n")
-    turns = 10
 
     # Loop until the player makes correct guesses. Allowed 10 turns.
     while turns > 0:
