@@ -52,27 +52,24 @@ class TableGame:
             return False
 
 
-def ask_user_position():
-    """
-    Ask user for position using input(). Integer for row and capital
-    letter for column. Return the position as a Tuple. Return an
-    error message if the input is not between the ones required.
-    """
-    if not sys.stdin.isatty():  # If running in Heroku or non-interactive terminal
-        print("\nThis game requires user input. Please run it locally.")
-        exit()  # Heroku compatibility check — exits if run non-interactively
+# Use readline instead of input() to receive data over socket stream
+def get_input(prompt):
+    print(prompt, end="", flush=True)
+    return sys.stdin.readline().strip()
 
+
+def ask_user_position():
     while True:
         try:
-            row_input = input("Enter row number (0 to 4) or type exit to quit: ").strip()
+            row_input = get_input("Enter row number (0 to 4) or type exit to quit: ")
             if row_input.lower() == 'exit':
-                print("\nGame exited. Goodbye!")
-                exit()
+                print("Game exited. Goodbye!")
+                sys.exit()
 
-            col_input = input("Enter column letter (A to E): ").strip().upper()
+            col_input = get_input("Enter column letter (A to E): ").upper()
             if col_input.lower() == 'exit':
-                print("\nGame exited. Goodbye!")
-                exit()
+                print("Game exited. Goodbye!")
+                sys.exit()
 
             if not row_input.isdigit() or int(row_input) not in range(5) or col_input not in 'ABCDE':
                 raise ValueError("Provide a valid column letter (A-E) and row number (0-4).")
@@ -82,17 +79,15 @@ def ask_user_position():
         except ValueError as e:
             print(f"Invalid input: {e}. Try again.\n")
 
-def computer_guess(previeus_guesses):
-    """
-    Generate a random guess for the computer. Ensure to not have duplicates.
-    """
+
+def computer_guess(previous_guesses):
     while True:
         x = random.randint(0, 4)
         y = random.choice('ABCDE')
-        if (x, y) not in previeus_guesses:
-            previeus_guesses.append((x, y))
+        if (x, y) not in previous_guesses:
+            previous_guesses.append((x, y))
             return x, y
-        
+
 
 def main():
     user_board = TableGame()
@@ -113,7 +108,7 @@ def main():
                 break
 
     print("Battleship ultimate!\n")
-    rounds = 10  # Max number of turns
+    rounds = 10
 
 # Main gameplay loop
     while rounds > 0:
@@ -137,7 +132,7 @@ def main():
                 print("You've sunk all the ships! You win!")
                 break
         
-        # Computer move
+        # Computer's turn
         print("Computer's turn:")
         comp_row, comp_col = computer_guess(user_board.guesses)
         print(f"Computer guessed: {comp_row}, {comp_col}")
