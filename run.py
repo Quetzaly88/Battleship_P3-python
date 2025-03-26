@@ -9,8 +9,7 @@ class TableGame:
         self.guesses = []
 
     def display_board(self, hide_ships=False):
-        header = "    A B C D E"
-        rows = [header]
+        output = "  A B C D E\n"
         for x in range(5):
             row = f"{x} |"
             for y in 'ABCDE':
@@ -18,8 +17,21 @@ class TableGame:
                 if hide_ships and val == 'S':
                     val = "*"
                 row += f" {val}"
-            rows.append(row)
-        print("\n".join(rows))
+            output += row + "\n"
+        print(output.strip())
+
+    # def display_board(self, hide_ships=False):
+    #     header = "    A B C D E"
+    #     rows = [header]
+    #     for x in range(5):
+    #         row = f"{x} |"
+    #         for y in 'ABCDE':
+    #             val = self.grid[(x, y)]
+    #             if hide_ships and val == 'S':
+    #                 val = "*"
+    #             row += f" {val}"
+    #         rows.append(row)
+    #     print("\n".join(rows))
 
 
     # def display_board(self, hide_ships=False):
