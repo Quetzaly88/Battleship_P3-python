@@ -51,18 +51,19 @@
 
     <script>
         const term = new Terminal({
-            cols: 100, 
+            cols: 100,
             rows: 30,
             fontFamily: 'Courier New, monospace,',
             convertEol: true,
-            disableStdin: false,
             cursorBlink: true
         });
 
         term.open(document.getElementById("terminal"));
-        term.writeln("🚀 Connecting to server...\n");
+        term.writeln("Connecting to server...\n");
 
         const socket = io();
+
+        let inputBuffer = "";
 
         socket.on("connect", () => {
             term.writeln("Connected to server\n");
@@ -77,7 +78,21 @@
         });
 
         term.onData((data) => {
-            socket.emit("command_entered", data);
+            if (data === "\r") {
+                // ENTER pressed
+                socket.emit("command_entered", inputBuffer + "\n");
+                inputBuffer = "";
+            } else if (data === "\u007F") {
+                // Backspace
+                if (inputBuffer.length > 0) {
+                    inputBuffer = inputBuffer.slice(0, -1);
+                    term.write('\b \b');
+                }
+            } else {
+                // Normal character
+                inputBuffer += data;
+                term.write(data);
+            }
         });
     </script>
 </body>
