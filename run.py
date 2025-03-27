@@ -111,6 +111,7 @@ def main():
         computer_board.display_board(hide_ships=True)
 
         # User move
+        print("Enter your guess (e.g., 2B) or type 'exit': ")
         while True:
             row_number, column_letter = ask_user_position()
 
