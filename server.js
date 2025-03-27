@@ -4,10 +4,8 @@ const http = require("http");
 const socketIO = require("socket.io");
 const path = require("path");
 
-// Serve static files from 'public' folder
 const fileServer = new static.Server(path.join(__dirname, "public"));
 
-// Create HTTP server
 const server = http.createServer((req, res) => {
   req
     .addListener("end", () => {
@@ -16,13 +14,11 @@ const server = http.createServer((req, res) => {
     .resume();
 });
 
-// Enable WebSockets
 const io = socketIO(server);
 
-// On new socket connection
 io.on("connection", (socket) => {
-  console.log("⚡ Client connected");
-  socket.emit("console_output", "[✓ Connected to server]");
+  console.log("Client connected");
+  // socket.emit("console_output", "[✓ Connected to server]");
 
   function runGame() {
     const pyshell = new PythonShell("run.py");
@@ -44,7 +40,7 @@ io.on("connection", (socket) => {
 
     // Handle errors from PythonShell
     pyshell.on("error", (err) => {
-      console.error("🐍 PythonShell error:", err);
+      console.error("PythonShell error:", err);
       socket.emit("console_output", `[Python Error] ${err.toString()}`);
     });
 
@@ -56,7 +52,7 @@ io.on("connection", (socket) => {
     // Clean up on client disconnect
     socket.on("disconnect", () => {
       pyshell.kill();
-      console.log("🚪 Client disconnected");
+      console.log("Client disconnected");
     });
   }
 
@@ -66,5 +62,5 @@ io.on("connection", (socket) => {
 // Start Node server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
