@@ -9,48 +9,16 @@ class TableGame:
         self.guesses = []
 
     def display_board(self, hide_ships=False):
-        output = "  A B C D E\n"
+        rows = ["   A B C D E"]
         for x in range(5):
-            row = f"{x} |"
+            row = [f"{x} |"]
             for y in 'ABCDE':
                 val = self.grid[(x, y)]
                 if hide_ships and val == 'S':
                     val = "*"
-                row += f" {val}"
-            output += row + "\n"
-        print(output.strip())
-
-    # def display_board(self, hide_ships=False):
-    #     header = "    A B C D E"
-    #     rows = [header]
-    #     for x in range(5):
-    #         row = f"{x} |"
-    #         for y in 'ABCDE':
-    #             val = self.grid[(x, y)]
-    #             if hide_ships and val == 'S':
-    #                 val = "*"
-    #             row += f" {val}"
-    #         rows.append(row)
-    #     print("\n".join(rows))
-
-
-    # def display_board(self, hide_ships=False):
-    #     board = "  A B C D E\n"
-    #     for x in range(5):
-    #         row = [str(x)]
-    #         for y in 'ABCDE':
-    #             cell = self.grid[(x, y)]
-    #             row.append("*" if hide_ships and cell == 'S' else cell)
-    #         board += " ".join(row) + "\n"
-    #     print(board)
-
-        #     for y in 'ABCDE':
-        #         if hide_ships and self.grid[(x, y)] == 'S':
-        #             row.append("*")
-        #         else:
-        #             row.append(self.grid[(x, y)])
-        #     print(" ".join(row))
-        # print()
+                row.append(val)
+                rows.append(" ".join(row))
+        print("\n" + "\n".join(rows) + "\n")
 
     def place_ship(self, x, y):
         self.grid[(x, y)] = 'S'
@@ -70,30 +38,28 @@ class TableGame:
 
 def get_input(prompt):
     print(prompt, end='', flush=True)
-    return sys.stdin.readline().strip()
+    value = sys.stdin.readline()
+    if not value:
+        return ""
+    return value.strip()
 
 
 def ask_user_position():
     while True:
         try:
-            # Ask for row number
-            row_input = get_input("Enter row number (0 to 4) or type exit to quit: ").strip()
-            if row_input.lower() == 'exit':
+            full_input = get_input("Enter your guess (e.g., 2B) or type 'exit':").strip().upper()
+            if not full_input:
+                raise ValueError("Input cannot be empty.")
+            if full_input.lower() == 'exit':
                 print("Game exited. Goodbye!")
                 sys.exit()
-            if not row_input.isdigit() or int(row_input) not in range(5):
-                raise ValueError("Provide a valid row number (0-4).")
-            row = int(row_input)
+            if len(full_input) != 2:
+                raise ValueError("Input must be 2 characters long (e.g., 2B).")
+            if not full_input[0].isdigit() or not full_input[1] not in 'ABCDE':
+                raise ValueError("Row must be 0–4 and column must be A–E")
 
-            # Ask for column letter
-            col_input = get_input("Enter column letter (A to E): ").strip().upper()
-            if col_input.lower() == 'EXIT':
-                print("Game exited. Goodbye!")
-                sys.exit()
-            if col_input not in 'ABCDE':
-                raise ValueError("Provide a valid column letter (A-E).")
-            col = col_input
-
+            row = int(full_input[0])
+            col = full_input[1]
             return row, col
 
         except ValueError as e:
@@ -127,12 +93,12 @@ def main():
                 computer_board.place_ship(x, y)
                 break
 
-    print("Battleship ultimate!\n")
+    print("\nBattleship ultimate!\n")
     rounds = 10
 
 # Main gameplay loop
     while rounds > 0:
-        print(f"-- Round {11 - rounds} --")
+        print(f"-- Round {11 - rounds} --\n")
         print("Your board:")
         user_board.display_board()
 
@@ -143,30 +109,35 @@ def main():
         print("Your turn:")
         while True:
             row_number, column_letter = ask_user_position()
+
+            if (row_number, column_letter) not in computer_board.grid:
+                print("Invalid position. Try again.")
+            continue
+
             if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
                 print("You've already guessed this spot. Try again.")
             else:
                 break
-
+        
         if computer_board.make_move(row_number, column_letter):
             if not computer_board.ships:
                 print("You've sunk all the ships! You win!")
                 break
 
         # Computer's turn
-        print("Computer's turn:")
+        print("\nComputer's turn:")
         comp_row, comp_col = computer_guess(user_board.guesses)
         print(f"Computer guessed: {comp_row}, {comp_col}")
 
         if user_board.make_move(comp_row, comp_col):
             if not user_board.ships:
-                print("All your ships have been sunk! You lose!")
+                print("\nAll your ships have been sunk! You lose!")
                 break
 
         rounds -= 1
 
         if rounds == 0:
-            print("No more rounds left. Game over!")
+            print("\nNo more rounds left. Game over!")
             if len(user_board.ships) > len(computer_board.ships):
                 print("You win by having more ships left!")
             elif len(computer_board.ships) > len(user_board.ships):
