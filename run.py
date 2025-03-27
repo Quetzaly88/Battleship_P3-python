@@ -17,7 +17,7 @@ class TableGame:
                 if hide_ships and val == 'S':
                     val = "*"
                 row.append(val)
-                rows.append(" ".join(row))
+            rows.append(" ".join(row))
         print("\n" + "\n".join(rows) + "\n")
 
     def place_ship(self, x, y):
@@ -47,16 +47,21 @@ def get_input(prompt):
 def ask_user_position():
     while True:
         try:
-            full_input = get_input("Enter your guess (e.g., 2B) or type 'exit':").strip().upper()
-            if not full_input:
-                raise ValueError("Input cannot be empty.")
+            full_input = get_input("Enter your guess (e.g., 2B) or type 'exit': ").strip().upper()
+            
             if full_input.lower() == 'exit':
                 print("Game exited. Goodbye!")
                 sys.exit()
+            
+            if not full_input:
+                print("Input cannot be empty. Try again.")
+                continue
+
             if len(full_input) != 2:
                 raise ValueError("Input must be 2 characters long (e.g., 2B).")
-            if not full_input[0].isdigit() or not full_input[1] not in 'ABCDE':
-                raise ValueError("Row must be 0–4 and column must be A–E")
+            
+            if not full_input[0].isdigit() or full_input[1] not in 'ABCDE':
+                raise ValueError("Row must be 0–4 and column must be A–E.")
 
             row = int(full_input[0])
             col = full_input[1]
@@ -112,7 +117,7 @@ def main():
 
             if (row_number, column_letter) not in computer_board.grid:
                 print("Invalid position. Try again.")
-            continue
+                continue
 
             if computer_board.grid[(row_number, column_letter)] in ['X', '-']:
                 print("You've already guessed this spot. Try again.")
