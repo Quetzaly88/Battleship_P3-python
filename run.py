@@ -9,7 +9,7 @@ class TableGame:
         self.guesses = []
 
     def display_board(self, hide_ships=False):
-        rows = ["   A B C D E"]
+        rows = ["    A B C D E"]
         for x in range(5):
             row = [f"{x} |"]
             for y in 'ABCDE':
@@ -48,18 +48,18 @@ def ask_user_position():
     while True:
         try:
             full_input = get_input("Enter your guess (e.g., 2B) or type 'exit': ").strip().upper()
-            
+
             if full_input.lower() == 'exit':
                 print("Game exited. Goodbye!")
                 sys.exit()
-            
+
             if not full_input:
                 print("Input cannot be empty. Try again.")
                 continue
 
             if len(full_input) != 2:
                 raise ValueError("Input must be 2 characters long (e.g., 2B).")
-            
+
             if not full_input[0].isdigit() or full_input[1] not in 'ABCDE':
                 raise ValueError("Row must be 0–4 and column must be A–E.")
 
@@ -111,7 +111,6 @@ def main():
         computer_board.display_board(hide_ships=True)
 
         # User move
-        print("Your turn:")
         while True:
             row_number, column_letter = ask_user_position()
 
