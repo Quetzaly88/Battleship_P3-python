@@ -4,6 +4,8 @@
 
     Battleship-P3 is a command-line battleship game built using Python. It allows a single player to compete against a computer opponent on a 5x5 grid. The aim of the game is to locate and sink the opponent's ships within a limited number of turns. The game runs in a terminal-like interface and is deployed via a web terminal using xterm.js and Heroku.
 
+Live Project: https://battleship-pp3-repetition-232e0186fcfa.herokuapp.com/
+
 
 ![mockup](./assets/images/mockup.png)
 
