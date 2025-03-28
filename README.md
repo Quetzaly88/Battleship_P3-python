@@ -5,12 +5,14 @@
     Battleship-P3 is a command-line battleship game built using Python. It allows a single player to compete against a computer opponent on a 5x5 grid. The aim of the game is to locate and sink the opponent's ships within a limited number of turns. The game runs in a terminal-like interface and is deployed via a web terminal using xterm.js and Heroku.
 
 
-![mockup](./assets/images/mockup.webp)
+![mockup](./assets/images/mockup.png)
 
 
 **DESIGN**
 
 This project was built using a minimal design to emphasize core Python functionality. The frontend is styled in a simple terminal-like interface to simulate a console game. I used xterm.js for rendering. 
+
+![game](./assets/images/game.png)
 
 
 **WIREFRAMES / FLOWCHART**
@@ -48,6 +50,8 @@ This project was built using a minimal design to emphasize core Python functiona
     - The game is played via an interactive xterm.js terminal embedded in a web page.
     - Powered by socket.io and python-shell to connect frontend and backend.
 
+![game-end](./assets/images/game%20end.png)
+
 
 **TECHNOLOGIES USED**
 
@@ -78,15 +82,13 @@ This project was built using a minimal design to emphasize core Python functiona
     - The Run Program button allows the user to reset the game and play again. 
 
 
-![CI lintern TEST](./assets/images/CI%20lintern.webp)
+![CI lintern TEST](./assets/images/lintern.png)
 
 
-![One compiler tester](./assets/images/tester.webp)
+![One compiler tester](./assets/images/onecompiler.png)
 
 
-
-
-![LIGHTHOUSE TEST](./assets/images/lighthouseebattleship.webp)
+![LIGHTHOUSE TEST](./assets/images/lighthouse.png)
 
 
 
