@@ -41,14 +41,13 @@
         }
 
         #terminal {
-            width: 90ch;
+            width: 80ch;
             height: 90vh;
             padding: 10px;
             overflow: auto;
             white-space: pre;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 24px;
-            line-height: 1.4;
+            font-size: 28px;
+            line-height: 1.2;
             background-color: black;
             color: white;
             border-radius: 8px;
@@ -67,7 +66,8 @@
         const term = new Terminal({
             cols: 100,
             rows: 30,
-            fontFamily: 'Courier New, monospace,',
+            fontSize: 28,
+            lineHeight: 1.2,
             convertEol: true,
             cursorBlink: true
         });
